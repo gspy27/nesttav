@@ -1,5 +1,5 @@
 const textLabel = document.getElementById("ResultText");
-let fishable = true
+let fishable = true;
 
 let Money1 = 0;
 
@@ -133,6 +133,14 @@ let TheFish = parseInt(localStorage.getItem("Fish"));
 //???
 let QuestionFish = parseInt(localStorage.getItem("???"));
 
+let BackpackSpace = 10;
+let FilledBackpackSpace
+setInterval(function() {
+  FilledBackpackSpace = Seaweed + Boot + Trout + Bass + Cod + Walleye + Salmon + Tuna + Grouper + Mackerel + Halibut + Marlin + Snapper + Eel + Shark + Swordfish + Sturgeon + Butterflyfish + Clownfish + Lionfish + Stingray + Anglerfish + RedHandfish + SakhalinSturgeon + DevilsHolePufferfish + TheFish;
+  document.getElementById("BackpackSpaceText").innerHTML = `Backpack: ${FilledBackpackSpace}/${BackpackSpace}`
+  document.getElementById("BackpackSpaceTextTwo").innerHTML = `Backpack: ${FilledBackpackSpace}/${BackpackSpace}`
+}, 200);
+
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
@@ -158,8 +166,11 @@ function CloseShop() {
 function Fish() {
   let fishNum = Math.random() * (99 + 1);
   
-  if (fishable = true) 
+  if (FilledBackpackSpace < BackpackSpace) {
+    if (fishable = true) 
   {
+    FilledBackpackSpace ++;
+    console.log(`${FilledBackpackSpace}/${BackpackSpace}`)
     if (fishNum <= 50) 
   {
     textLabel.innerHTML = "Fishing...";
@@ -395,6 +406,12 @@ function Fish() {
   }
 
   }
+  } else { 
+    textLabel.innerHTML = "Not enough backpack space! Sell Fish or buy more space.";
+    textLabel.style.color = "red";
+    sleep(2100 + 1754).then(() => textLabel.innerHTML = "Fish!");
+    sleep(2100 + 1754).then(() => textLabel.style.color = "rgb(0, 0, 0)");
+  }
 }
 
 window.addEventListener('keydown', function(event) {
@@ -492,8 +509,27 @@ setInterval(function() {
 }, 500);
 
 //Selling
+function RandomNum(min, max) {
+  const floatRandom = Math.random()
+
+  const difference = max - min
+
+  const RandomDifference = floatRandom * difference
+
+  const randomRange = RandomDifference + min
+
+  return randomRange
+}
+
+/* PUT INTO ALL FUNCTIONS 
+  if (Seaweed >=1 || Boot >= 1 || Trout >= 1 || Bass >= 1) {
+    
+  } 
+*/
+
 function SellCommons() {
-  Money = Money + (Seaweed * Math.floor(Math.random() * (5 - 1)) + 1 ) + (Boot * Math.floor(Math.random() * (5 - 1)) + 1 )  + (Trout * Math.floor(Math.random() * (5 - 1)) + 1 )  + (Bass * Math.floor(Math.random() * (5 - 1)) + 1 )  + (Cod * Math.floor(Math.random() * (5 - 1)) + 1 ) 
+  if (Seaweed >=1 || Boot >= 1 || Trout >= 1 || Bass >= 1 || Cod >= 1) {
+    Money = Money + (Seaweed * Math.floor(RandomNum(1, 5))) + (Boot * Math.floor(RandomNum(1, 5)))  + (Trout * Math.floor(RandomNum(1, 5)))  + (Bass * Math.floor(RandomNum(1, 5)))  + (Cod * Math.floor(RandomNum(1, 5))) 
   sleep(100).then(() => 
     Seaweed = 0,
     Boot = 0,
@@ -502,72 +538,85 @@ function SellCommons() {
     Cod = 0
   );
   console.log("Sold Commons")
+  }
 }
 function SellUncommons() {
-  Money = Money + (Walleye * Math.floor(Math.random() * (15 - 6)) + 6 ) + (Salmon * Math.floor(Math.random() * (15 - 6)) + 6 )  + (Tuna * Math.floor(Math.random() * (15 - 6)) + 6 )  + (Grouper * Math.floor(Math.random() * (15 - 6)) + 6 )  + (Mackerel * Math.floor(Math.random() * (15 - 6)) + 6 ) + (Halibut * Math.floor(Math.random() * (15 - 6)) + 6 )
+  if (Walleye >=1 || Salmon >= 1 || Tuna >= 1 || Grouper >= 1 || Mackerel >= 1 || Halibut >= 1) {
+    Money = Money + (Walleye * Math.floor(RandomNum(6, 15))) + (Salmon * Math.floor(RandomNum(6, 15)))  + (Tuna * Math.floor(RandomNum(6, 15)))  + (Grouper * Math.floor(RandomNum(6, 15)))  + (Mackerel * Math.floor(RandomNum(6, 15))) + (Halibut * Math.floor(RandomNum(6, 15)))
   sleep(100).then(() => 
-    Seaweed = 0,
-    Boot = 0,
-    Trout = 0,
-    Bass = 0,
-    Cod = 0
+    Walleye = 0,
+    Salmon = 0,
+    Tuna = 0,
+    Grouper = 0,
+    Mackerel = 0,
+    Halibut = 0
   );
   console.log("Sold Uncommons")
+  }  
 }
 function SellRares() {
-  Money = Money + (Marlin * Math.floor(Math.random() * (25 - 16)) + 16 ) + (Snapper * Math.floor(Math.random() * (25 - 16)) + 16 )  + (Eel * Math.floor(Math.random() * (25 - 16)) + 16 )
+  if (Marlin >=1 || Snapper >= 1 || Eel >= 1) {
+    Money = Money + (Marlin * Math.floor(RandomNum(16, 40))) + (Snapper * Math.floor(RandomNum(16, 40)))  + (Eel * Math.floor(RandomNum(16, 40)))
   sleep(100).then(() => 
-    Seaweed = 0,
-    Boot = 0,
-    Trout = 0,
-    Bass = 0,
-    Cod = 0
+    Marlin = 0,
+    Snapper = 0,
+    Eel = 0,
   );
   console.log("Sold Rares")
+  } 
 }
 function SellReallyRares() {
-  Money = Money + (Shark * Math.floor(Math.random() * (53 - 26)) + 26 ) + (Swordfish * Math.floor(Math.random() * (53 - 26)) + 26 )  + (Sturgeon * Math.floor(Math.random() * (53 - 26)) + 26 )  + (Butterflyfish * Math.floor(Math.random() * (53 - 26)) + 26 )
+  if (Shark >=1 || Swordfish >= 1 || Sturgeon >= 1 || Butterflyfish >= 1) {
+    Money = Money + (Shark * Math.floor(RandomNum(41, 100))) + (Swordfish * Math.floor(RandomNum(41, 100)))  + (Sturgeon * Math.floor(RandomNum(41, 100)))  + (Butterflyfish * Math.floor(RandomNum(41, 100)))
   sleep(100).then(() => 
-    Seaweed = 0,
-    Boot = 0,
-    Trout = 0,
-    Bass = 0,
-    Cod = 0
+    Shark = 0,
+    Swordfish = 0,
+    Sturgeon = 0,
+    Butterflyfish = 0,
   );
   console.log("Sold Really Rares")
+  }
 }
 function SellUltraRares() {
-  Money = Money + (Clownfish * Math.floor(Math.random() * (153 - 51)) + 51 ) + (Lionfish * Math.floor(Math.random() * (153 - 51)) + 51 )  + (Stingray * Math.floor(Math.random() * (153 - 51)) + 51 )
+  if (Clownfish >=1 || Lionfish >= 1 || Stingray >= 1) {
+    Money = Money + (Clownfish * Math.floor(RandomNum(101, 250))) + (Lionfish * Math.floor(RandomNum(101, 250)))  + (Stingray * Math.floor(Math.random() * (153 - 51)) + 51 )
   sleep(100).then(() => 
-    Seaweed = 0,
-    Boot = 0,
-    Trout = 0,
-    Bass = 0,
-    Cod = 0
+    Clownfish = 0,
+    Lionfish = 0,
+    Stingray = 0,
   );
   console.log("Sold Ultra Rares")
+  } 
 }
 function SellGodlys() {
-  Money = Money + (Anglerfish * Math.floor(Math.random() * (1466 - 143)) + 143 )  + (RedHandfish * Math.floor(Math.random() * (1466 - 143)) + 143 ) 
+  if (Anglerfish >=1 || RedHandfish >= 1) {
+    Money = Money + (Anglerfish * Math.floor(RandomNum(251, 625)))  + (RedHandfish * Math.floor(RandomNum(251, 625))) 
   sleep(100).then(() => 
-    Seaweed = 0,
-    Boot = 0,
-    Trout = 0,
-    Bass = 0,
-    Cod = 0
+    Anglerfish = 0,
+    RedHandfish = 0,
   );
   console.log("Sold Godlys")
+  } 
 }
 function SellUngodlys() {
-  Money = Money + (SakhalinSturgeon * Math.floor(Math.random() * (5794 - 1743)) + 1 ) + (DevilsHolePufferfish * Math.floor(Math.random() * (5794 - 1743)) + 1 ) 
+  if (SakhalinSturgeon >=1 || DevilsHolePufferfish >= 1) {
+    Money = Money + (SakhalinSturgeon * Math.floor(RandomNum(626, 1500))) + (DevilsHolePufferfish * Math.floor(RandomNum(626, 1500))) 
   sleep(100).then(() => 
-    Seaweed = 0,
-    Boot = 0,
-    Trout = 0,
-    Bass = 0,
-    Cod = 0
+    SakhalinSturgeon = 0,
+    DevilsHolePufferfish = 0,
   );
   console.log("Sold Ungodlys")
+  } 
+}
+
+function SellALL() {
+  SellCommons()
+  SellUncommons()
+  SellRares()
+  SellReallyRares()
+  SellUltraRares()
+  SellGodlys()
+  SellUngodlys()
 }
 
 //Switch Menu
