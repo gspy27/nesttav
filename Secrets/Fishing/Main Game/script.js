@@ -622,13 +622,16 @@ function SellALL() {
 //Switch Menu
 function ToInventory() {
   document.getElementById("Sell").style.opacity = "0%";
-  
+  document.getElementById("Shop").style.opacity = "0%";
   document.getElementById("Inventory").style.opacity = "100%";
-  
 }
 function ToSell() {
   document.getElementById("Sell").style.opacity = "100%";
-  
+  document.getElementById("Shop").style.opacity = "0%";
   document.getElementById("Inventory").style.opacity = "0%";
-  
+}
+function ToShop() {
+  document.getElementById("Sell").style.opacity = "0%";
+  document.getElementById("Shop").style.opacity = "100%";
+  document.getElementById("Inventory").style.opacity = "0%";
 }
