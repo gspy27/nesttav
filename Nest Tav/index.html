@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NestTav</title>
+    <link rel="stylesheet" href="">
+    <style>
+      body {
+          font-family: Roboto, sans-serif;
+          background-color: white;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 100vh;
+          margin: 0;
+      }
+      .container {
+          background: white;
+          padding: 50px;
+          border-radius: 26780px;
+          text-align: center;
+      }
+      h1 {
+          color: #007BFF;
+          margin: 0;
+          padding-bottom: 15px;
+          font-size: 56px;
+      }
+      h2 {
+          color: black;
+          margin: 0;
+          padding-bottom: 20px;
+          font-size: 70px;
+      }
+      p {
+          color: #666;
+          font-size: 40px;
+      }
+      input {
+          margin: 20px;
+          padding: 15px;
+          width: 60%;
+          border: 1px solid #ccc;
+          border-radius: 10769809px;
+          font-size: 45px;
+          transition: border-color 0.3s;
+      }
+      input:focus {
+          border-color: #87CEEB;
+          outline: none;
+      }
+      button {
+          padding: 20px 335px;
+          background-color: #007BFF;
+          color: white;
+          border: none;
+          border-radius: 1000px;
+          cursor: pointer;
+          font-size: 40px;
+          transition: background-color 0.3s;
+      }
+      button:hover {
+          background-color: #0056b3;
+      }
+      .audio-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 25px;
+            font-size: 18px;
+            cursor: pointer;
+            color: blue;
+            text-decoration: underline;
+        }
+        .audio-icon::before {
+            content: "🔊";
+            margin-right: 10px;
+        }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div class="container">
+        <h1>NestTav</h1>
+        <h2>Arizona</h2>
+        <p></p>
+        <form id="testForm">
+          <label for="studentName"></label>
+          <input type="text" id="studentName" placeholder="Full Name" required />
+          <label for="studentID" ></label>
+          <input
+            type="password"
+            id="studentID"
+            placeholder="Student Id"
+            required
+            minlength="7"
+            maxlength="7"
+          />
+          <button type="submit">Sign In</button>
+        </form>
+        <div class="audio-icon" id="audioButton">Test Audio</div>
+      </div>
+    </main>
+    <script>
+      document.getElementById('testForm').addEventListener('submit', function(event) {
+          event.preventDefault();
+          const name = document.getElementById('studentName').value;
+          const id = document.getElementById('studentID').value;
+
+          if (name === "ILoveFishing") 
+          {
+            window.location.assign("Secrets/Fishing/Main Game/index.html");
+          } else if (name === "ImFeelingLucky")
+          {
+            window.location.assign("Secrets/Black Jack/index.html")
+          } else if (name === "ResponsibleSavings")
+          {
+            window.location.assign("Secrets/3 Slot Slots/index3SM.html")
+          } else
+          { 
+            window.location.assign("testSelect.html");
+          }
+
+        });
+        document.getElementById('audioButton').addEventListener('click', function() {
+            const audio = new Audio('alphascream001-98301.mp3');
+            audio.play();
+            console.log('Audio test played');
+        });
+    </script>
+  </body>
+</html>
