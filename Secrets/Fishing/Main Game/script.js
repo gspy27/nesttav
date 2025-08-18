@@ -2,6 +2,8 @@ const textLabel = document.getElementById("ResultText");
 let fishable = true;
 
 let Money1 = 0;
+let sleepTime;
+let FasterFish = false;
 
 window.localStorage.setItem("Money", Money1)
 
@@ -136,9 +138,16 @@ let QuestionFish = parseInt(localStorage.getItem("???"));
 let BackpackSpace = 10;
 let FilledBackpackSpace
 setInterval(function() {
+  if (FasterFish === false) {
+    sleepTime = 1754;
+  } else {
+    sleepTime = 154;
+  }
+
   FilledBackpackSpace = Seaweed + Boot + Trout + Bass + Cod + Walleye + Salmon + Tuna + Grouper + Mackerel + Halibut + Marlin + Snapper + Eel + Shark + Swordfish + Sturgeon + Butterflyfish + Clownfish + Lionfish + Stingray + Anglerfish + RedHandfish + SakhalinSturgeon + DevilsHolePufferfish + TheFish;
   document.getElementById("BackpackSpaceText").innerHTML = `Backpack: ${FilledBackpackSpace}/${BackpackSpace}`
   document.getElementById("BackpackSpaceTextTwo").innerHTML = `Backpack: ${FilledBackpackSpace}/${BackpackSpace}`
+  document.getElementById("BackpackSpaceTextThree").innerHTML = `Backpack: ${FilledBackpackSpace}/${BackpackSpace}`
 }, 200);
 
 function sleep(ms) {
@@ -162,6 +171,13 @@ function CloseShop() {
     document.getElementById("OpenShop").style.opacity = "100%";
 }
 
+document.getElementById("FishButton").addEventListener('click',()=>{
+    document.getElementById("FishButton").disabled = true
+    sleep(sleepTime + 2100).then(() => document.getElementById("FishButton").disabled = false)
+})
+
+
+
 //Fishing
 function Fish() {
   let fishNum = Math.random() * (99 + 1);
@@ -175,7 +191,7 @@ function Fish() {
   {
     textLabel.innerHTML = "Fishing...";
     fishable = false;
-    let sleepTime = 1754;
+    
     let whichFishNum = Math.floor(Math.random() * 4); //Five Fish
     fishable = false
     document.getElementById("GoFishDiv").style.opacity = "0%";
@@ -211,7 +227,7 @@ function Fish() {
   {
     textLabel.innerHTML = "Fishing...";
     fishable = false;
-    let sleepTime = 1754;
+    
     let whichFishNum = Math.floor(Math.random() * 5); //Six Fish
     document.getElementById("GoFishDiv").style.opacity = "0%";
     
@@ -250,7 +266,7 @@ function Fish() {
   {
     textLabel.innerHTML = "Fishing..."
     fishable = false
-    let sleepTime = 1754;
+    
     let whichFishNum = Math.floor(Math.random() * 2) // Three Fish
     document.getElementById("GoFishDiv").style.opacity = "0%"
     
@@ -277,7 +293,7 @@ function Fish() {
   {
     textLabel.innerHTML = "Fishing..."
     fishable =  false;
-    let sleepTime = 1754;
+    
     let whichFishNum = Math.floor(Math.random() * 3) //Four Fish
     document.getElementById("GoFishDiv").style.opacity = "0%"
     
@@ -308,7 +324,7 @@ function Fish() {
   {
     textLabel.innerHTML = "Fishing..."
     fishable = false;
-    let sleepTime = 1754;
+    
     let whichFishNum = Math.floor(Math.random() * 2) //Three Fish
     document.getElementById("GoFishDiv").style.opacity = "0%"
     
@@ -335,7 +351,7 @@ function Fish() {
   {
     textLabel.innerHTML = "Fishing..."
     fishable = false;
-    let sleepTime = 1754;
+    
     let whichFishNum = Math.floor(Math.random() * 1) //Two Fish
     document.getElementById("GoFishDiv").style.opacity = "0%"
     
@@ -358,7 +374,7 @@ function Fish() {
   {
     textLabel.innerHTML = "Fishing..."
     fishable = false;
-    let sleepTime = 1754;
+    
     let whichFishNum = Math.floor(Math.random() * 1) //Two Fish
     document.getElementById("GoFishDiv").style.opacity = "0%"
     
@@ -381,7 +397,7 @@ function Fish() {
   {
     textLabel.innerHTML = "Fishing..."
     fishable = false;
-    let sleepTime = 1754;
+    
     document.getElementById("GoFishDiv").style.opacity = "0%"
     sleep(sleepTime).then(() => TheFish ++);
     sleep(sleepTime).then(() => textLabel.innerHTML = "You caught The Fish");
@@ -394,7 +410,7 @@ function Fish() {
   {
     textLabel.innerHTML = "Fishing..."
     fishable = false;
-    let sleepTime = 1754;
+    
     document.getElementById("GoFishDiv").style.opacity = "0%"
     sleep(sleepTime).then(() => QuestionFish ++);
     sleep(sleepTime).then(() => textLabel.innerHTML = "You caught a ???");
@@ -434,6 +450,7 @@ window.addEventListener('keydown', function(event) {
 //Make inventory show values
 const MoneyText = document.getElementById("MoneyText")
 const MoneyTextTwo = document.getElementById("MoneyTextTwo")
+const MoneyTextThree = document.getElementById("MoneyTextThree")
 
 const SeaweedText = document.getElementById("Seaweed")
 const BootText = document.getElementById("Boot")
@@ -472,6 +489,7 @@ const TheFishText = document.getElementById("TheFish")
 setInterval(function() {
     MoneyText.innerHTML = `Money: ${Money}`
     MoneyTextTwo.innerHTML = `Money: ${Money}`
+    MoneyTextThree.innerHTML = `Money: ${Money}`
 
     SeaweedText.innerHTML = `Seaweed: ${Seaweed}`
     BootText.innerHTML = `Boots: ${Boot}`
@@ -624,14 +642,47 @@ function ToInventory() {
   document.getElementById("Sell").style.opacity = "0%";
   document.getElementById("Shop").style.opacity = "0%";
   document.getElementById("Inventory").style.opacity = "100%";
+  document.getElementById("Sell").style.zIndex = "1";
+  document.getElementById("Shop").style.zIndex = "1";
+  document.getElementById("Inventory").style.zIndex = "3";
 }
 function ToSell() {
   document.getElementById("Sell").style.opacity = "100%";
   document.getElementById("Shop").style.opacity = "0%";
   document.getElementById("Inventory").style.opacity = "0%";
+  document.getElementById("Sell").style.zIndex = "3";
+  document.getElementById("Shop").style.zIndex = "1";
+  document.getElementById("Inventory").style.zIndex = "1";
 }
 function ToShop() {
   document.getElementById("Sell").style.opacity = "0%";
   document.getElementById("Shop").style.opacity = "100%";
   document.getElementById("Inventory").style.opacity = "0%";
+  document.getElementById("Sell").style.zIndex = "1";
+  document.getElementById("Shop").style.zIndex = "3";
+  document.getElementById("Inventory").style.zIndex = "1";
+}
+
+//Shop
+function BuySpace(amount, price) {
+  if (Money >= price) 
+  {
+    Money = Money - price;
+    BackpackSpace = BackpackSpace + amount;
+  } else 
+  {
+    console.log("Not Enough Money!")
+  }
+}
+
+function BuyFasterFish() {
+  if (Money >= 750) {
+    Money = Money - 750;
+    FasterFish = true;
+    console.log(FasterFish)
+    document.getElementById("FasterFishing").style.opacity = "0%"
+    document.getElementById("FasterFishing").style.cursor = "not-allowed"
+    document.getElementById("FasterFishing").style.pointerEvents = "none"
+    document.getElementById("FasterFishingLabel").style.opacity = "0%"
+  }
 }
